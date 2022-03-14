@@ -28,6 +28,32 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <!-- DATA SCRAPING -->
+  <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+  <script type="text/javascript">
+    $(function () {
+        //Mengambil data dari file headlineScraper.json dengan fungsi $.get() JQuery
+      $.get("headline.json", function (obj) {
+          //Tag tabel awal
+        var str = "<table class=table table-dark table-striped>";
+          //Judul tabel
+          str += "<tr><td>No</td><td>Kategori</td><td>Judul</td><td>Waktu Publish</td><td>Waktu Scraping</td></tr>";
+          //Looping data headline dengan fungsi $.each() JQuery
+        $.each(obj, function (n, data) {
+            //Isi tabel
+              str += "<tr><td>" + (n + 1) + "</td>";
+              str += "<td>" + data.kategori + "</td>";
+              str += "<td>" + data.judul + "</td>";
+              str += "<td>" + data.waktupublish + "</td>";
+              str += "<td>" + data.waktuScraping + "</td></tr>";
+        });
+          //Tag tabel penutup
+        str += "</table>";
+        //Display semua headline ke html dengan id=media
+        $("#headline_json").html(str);
+      });
+    });
+  </script>
 
   <!-- =======================================================
   * Template Name: iPortfolio - v3.7.0
@@ -61,9 +87,10 @@
           <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
           <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
           <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Skills</span></a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portofolio</span></a></li>
+          <!-- <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portofolio</span></a></li> -->
           <li><a href="#closing" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Closing</span></a></li>
           <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+          <li><a href="#scrap" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Web Scraping</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
@@ -222,12 +249,11 @@
     </section><!-- End Skills Section -->
 
         <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
+    <!-- <section id="portfolio" class="portfolio section-bg">
       <div class="container">
 
         <div class="section-title">
           <h2>Portofolio</h2>
-          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <div class="row" data-aos="fade-up">
@@ -236,7 +262,6 @@
               <li data-filter="*" class="filter-active">All</li>
               <li data-filter=".filter-web">Web</li>
               <li data-filter=".filter-dekstop">Dekstop</li>
-              <!-- <li data-filter=".filter-canva">Canva</li> -->
             </ul>
           </div>
         </div>
@@ -283,60 +308,10 @@
             </div>
           </div>
 
-          <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div> -->
-
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section> --><!-- End Portfolio Section -->
 
     <!-- ======= Closing Section ======= -->
     <section id="closing" class="closing">
@@ -429,6 +404,18 @@
 
       </div>
     </section><!-- End Contact Section -->
+
+    <!-- ======= Web Scraping Section ======= -->
+    <section id="scrap" class="scrap">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Web Scraping Result</h2>
+          <h4><b><center>Berita Terkini Republika Online</center></b></h4>
+          <br>
+          <div id="headline_json"></div>
+      </div>
+    </section> <!--End Closing Section--> 
 
   </main><!-- End #main -->
 
